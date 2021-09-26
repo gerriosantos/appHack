@@ -1,5 +1,6 @@
 library(shiny)
 library(shinydashboard)
+#library(bs4Dash)
 
 
 lista_turma_q <- readr::read_rds('produto1.rds') |>
@@ -37,8 +38,14 @@ ui <- dashboardPage(
               includeMarkdown('index.Rmd')
       ),
       tabItem(
+        tabName = 'escola'
+      ),
+
+
+
+      tabItem(
         div(class = 'header', checked = NA,
-            h1('Oportunidade de Aprendizagem')
+            h1('Oportunidades de Aprendizagens')
         ),
         br(),
         tabName = 'turma',
