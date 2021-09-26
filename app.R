@@ -11,7 +11,8 @@ lista_questao <- readr::read_rds('produto1.rds') |>
   dplyr::pull(q_oport_aprend)
 
 escalas_oportun_aprend <- readr::read_rds("escalas_oportun_aprend.rds")
-descricao <- readr::read_csv2("descricao_questoes.csv", locale = locale(encoding = "Latin1"))[,c(1,2)]
+descricao <- readr::read_csv2("descricao_questoes.csv",
+                              locale = readr::locale(encoding = "Latin1"))[,c(1,2)]
 
 
 
@@ -109,15 +110,16 @@ server <- function(input, output, session) {
 
 
   oportunidade_inadequada <- reactive({
-    as.character(escalas_oportun_aprend[(escalas_oportun_aprend$nome_turma == input$turma & escalas_oportun_aprend$name == input$questao),][,"qual_indes"][[1]])
+    as.character(escalas_oportun_aprend[(escalas_oportun_aprend$nome_turma == input$turma &
+                                           escalas_oportun_aprend$name == input$questao),][,"qual_indes"][[1]])
   })
 
   oportunidade_adequada <- reactive({
-    as.character(escalas_oportun_aprend[(escalas_oportun_aprend$nome_turma == input$turma & escalas_oportun_aprend$name == input$questao),][,"qual_adeq"][[1]])
+    as.character(escalas_oportun_aprend[(escalas_oportun_aprend$nome_turma == input$turma &
+                                           escalas_oportun_aprend$name == input$questao),][,"qual_adeq"][[1]])
   })
 
   output$oportunidades_inadequadas <- renderInfoBox({
-
 
     infoBox(
       "Inadequadas",
